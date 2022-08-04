@@ -2,7 +2,7 @@ package com.lacheln.linkedlist;
 
 /**
  * SingerLinkedList
- * 单向链表 按照顺序添加
+ * 单向链表 不考虑编号顺序
  * @author lacheln
  * @date 2022/8/4 21:47
  * @since 1.0.0
@@ -18,10 +18,17 @@ public class SingerLinkedListDemo {
         //创建链表
         SingerLinkedList singerLinkedList = new SingerLinkedList();
         //加入
-        singerLinkedList.add(hero1);
-        singerLinkedList.add(hero2);
-        singerLinkedList.add(hero3);
-        singerLinkedList.add(hero4);
+//        singerLinkedList.add(hero1);
+//        singerLinkedList.add(hero4);
+//        singerLinkedList.add(hero2);
+//        singerLinkedList.add(hero3);
+
+        //加入 按照编号的顺序
+        singerLinkedList.addByOrder(hero1);
+        singerLinkedList.addByOrder(hero4);
+        singerLinkedList.addByOrder(hero2);
+        singerLinkedList.addByOrder(hero3);
+        singerLinkedList.addByOrder(hero3);
 
         //显示列表
         singerLinkedList.list();
@@ -53,6 +60,33 @@ class SingerLinkedList {
         //当退出while循环时，temp就指向了链表的最后
         //将最后这个结点的next 指向新的结点
         temp.next = heroNode;
+    }
+
+    //第二种方式，在添加英雄时，根据排名将英雄插入到指定位置(如果有这个排名，则添加失败，并给出提示)
+    public void addByOrder(HeroNode heroNode){
+        //头结点不能动，需要添加辅助辅助变量，来帮助找到添加的位置
+        //因为单链表，因为我们找的temp 是位于添加位置的前一个结点，否则插入不了
+        HeroNode temp = head;
+        boolean flag = false; //flag 标志 添加的编号是否存在，默认为false
+        while (true){
+            if (temp.next == null){ //说明temp已经在链表的最后
+                break;
+            }
+            if (temp.next.no > heroNode.no){ //位置找到，就temp的后面插入
+                break;
+            }else if (temp.next.no == heroNode.no){ //说明 希望添加的 heroNode 的编号已经存在
+                flag = true;// 编号存在
+                break;
+            }
+            temp = temp.next; //后移，遍历当前链表
+        }
+        if (flag){ //不能添加，说明编号存在
+            System.out.printf("准备插入的英雄编号 %d 已经存在，不能加入\n",heroNode.no);
+        }else {
+            //插入到链表中，temp的后面
+            heroNode.next = temp.next;
+            temp.next = heroNode;
+        }
     }
 
     //显示链表
