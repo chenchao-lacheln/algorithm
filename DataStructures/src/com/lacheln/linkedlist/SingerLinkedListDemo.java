@@ -3,6 +3,7 @@ package com.lacheln.linkedlist;
 /**
  * SingerLinkedList
  * 单向链表 不考虑编号顺序
+ *
  * @author lacheln
  * @date 2022/8/4 21:47
  * @since 1.0.0
@@ -40,25 +41,29 @@ public class SingerLinkedListDemo {
         System.out.println("修改后的链表的情况");
         singerLinkedList.list();
 
+        //删除一个结点
+        singerLinkedList.del(1);
+        System.out.println("删除后的链表的情况");
+        singerLinkedList.list();
     }
 }
 
 //定义 SingerLinkedList管理英雄
 class SingerLinkedList {
     // 初始化头结点，头结点不动，不存放具体的数据
-    private HeroNode head = new HeroNode(0,"","");
+    private HeroNode head = new HeroNode(0, "", "");
 
     // 添加结点到单向链表
     // 当不考虑编号顺序时
     // 1.找到当前链表的最后结点
     // 2.将最后这个结点的 next  指向新的结点
-    public void add(HeroNode heroNode){
+    public void add(HeroNode heroNode) {
         //因为head结点不能动，因此我们需要一个辅助变量temp
         HeroNode temp = head;
         //遍历链表，找到最后
-        while (true){
+        while (true) {
             //找到链表的最后
-            if (temp.next == null){
+            if (temp.next == null) {
                 break;
             }
             //如果没有找到最后，将temp后移
@@ -70,26 +75,26 @@ class SingerLinkedList {
     }
 
     //第二种方式，在添加英雄时，根据排名将英雄插入到指定位置(如果有这个排名，则添加失败，并给出提示)
-    public void addByOrder(HeroNode heroNode){
+    public void addByOrder(HeroNode heroNode) {
         //头结点不能动，需要添加辅助辅助变量，来帮助找到添加的位置
         //因为单链表，因为我们找的temp 是位于添加位置的前一个结点，否则插入不了
         HeroNode temp = head;
         boolean flag = false; //flag 标志 添加的编号是否存在，默认为false
-        while (true){
-            if (temp.next == null){ //说明temp已经在链表的最后
+        while (true) {
+            if (temp.next == null) { //说明temp已经在链表的最后
                 break;
             }
-            if (temp.next.no > heroNode.no){ //位置找到，就temp的后面插入
+            if (temp.next.no > heroNode.no) { //位置找到，就temp的后面插入
                 break;
-            }else if (temp.next.no == heroNode.no){ //说明 希望添加的 heroNode 的编号已经存在
+            } else if (temp.next.no == heroNode.no) { //说明 希望添加的 heroNode 的编号已经存在
                 flag = true;// 编号存在
                 break;
             }
             temp = temp.next; //后移，遍历当前链表
         }
-        if (flag){ //不能添加，说明编号存在
-            System.out.printf("准备插入的英雄编号 %d 已经存在，不能加入\n",heroNode.no);
-        }else {
+        if (flag) { //不能添加，说明编号存在
+            System.out.printf("准备插入的英雄编号 %d 已经存在，不能加入\n", heroNode.no);
+        } else {
             //插入到链表中，temp的后面
             heroNode.next = temp.next;
             temp.next = heroNode;
@@ -99,9 +104,9 @@ class SingerLinkedList {
     //修改结点信息,根据no编号来修改，即no编号不能改
     //说明
     //1.根据newHeroNode 的no 来修改即可
-    public void update(HeroNode newHeroNode){
+    public void update(HeroNode newHeroNode) {
         //判断是否为空
-        if (head.next == null){
+        if (head.next == null) {
             System.out.println("链表为空~");
             return;
         }
@@ -109,38 +114,63 @@ class SingerLinkedList {
         //定义一个辅助变量
         HeroNode temp = head.next;
         boolean flag = false;
-        while (true){
-            if (temp == null){
+        while (true) {
+            if (temp == null) {
                 break; //已经遍历完链表
             }
-            if (temp.no == newHeroNode.no){
+            if (temp.no == newHeroNode.no) {
                 flag = true; //找到了
                 break;
             }
             temp = temp.next;
         }
         //根据flag判断是否找到了要修改的结点
-        if (flag){
-            temp.name  = newHeroNode.name;
+        if (flag) {
+            temp.name = newHeroNode.name;
             temp.nickname = newHeroNode.nickname;
-        }else {
-            System.out.printf("没有找到编号 %d 的结点，不能修改\n",newHeroNode.no);
+        } else {
+            System.out.printf("没有找到编号 %d 的结点，不能修改\n", newHeroNode.no);
         }
 
     }
 
+    //删除结点
+    //思路
+    //1.head 不能动，因为我们需要一个temp辅助结点，找到待删结点的前一个结点
+    //2.说明我们在比较时，是temp.next.no 和 需要删除的结点的no比较
+    public void del(int no) {
+        HeroNode temp = head;
+        boolean flag = false; // 标志是否找到待删除的结点
+        while (true) {
+            if (temp.next == null) { //已经到链表的最后
+                break;
+            }
+            if (temp.next.no == no) {
+                //找到了待删除结点的前一个结点 temp
+                flag = true;
+                break;
+            }
+            temp = temp.next; //temp 后移
+        }
+        if (flag){ //找到
+             temp.next = temp.next.next;
+        }else {
+            System.out.printf("要删除的 %d 结点，不存在",no);
+        }
+    }
+
     //显示链表
-    public void list(){
+    public void list() {
         //判断链表是否为空
-        if (head.next == null){
+        if (head.next == null) {
             System.out.println("链表为空");
             return;
         }
         //头结点不能动，需要定义辅助变量进行遍历
         HeroNode temp = head.next;
-        while (true){
+        while (true) {
             //判断是否到链表最后
-            if (temp == null){
+            if (temp == null) {
                 break;
             }
             //输出结点信息
@@ -168,7 +198,7 @@ class HeroNode {
     @Override
     public String toString() {
         return "HeroNode{" +
-                "no=" + no  +
+                "no=" + no +
                 ", name='" + name + '\'' +
                 ", nickname='" + nickname +
                 '}';
