@@ -143,6 +143,5 @@ class CircleQueue {
         }
         return arr[front];
     }
-
 }
 

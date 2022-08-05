@@ -45,6 +45,32 @@ public class SingerLinkedListDemo {
         singerLinkedList.del(1);
         System.out.println("删除后的链表的情况");
         singerLinkedList.list();
+
+        //求单链表的有效节点的个数
+        System.out.println("有效的节点个数 = " + getLength(singerLinkedList.getHead()));
+    }
+
+    //查找单链表中的倒数第K个节点【新浪面试题】
+
+
+    //获取到单链表的节点的个数（如果是带头结点的链表，需求不统计头结点）
+    /**
+     *
+     * @param head 链表的头结点
+     * @return 返回有效节点的个数
+     */
+    public static int getLength(HeroNode head){
+        if (head.next == null){//空链表
+            return 0;
+        }
+        int length = 0;
+        //定义一个辅助变量
+        HeroNode cur = head.next; //没有统计头结点
+        while (cur != null){
+            length++;
+            cur = cur.next;//遍历
+        }
+        return length;
     }
 }
 
@@ -52,6 +78,11 @@ public class SingerLinkedListDemo {
 class SingerLinkedList {
     // 初始化头结点，头结点不动，不存放具体的数据
     private HeroNode head = new HeroNode(0, "", "");
+
+    //返回头结点
+    public HeroNode getHead() {
+        return head;
+    }
 
     // 添加结点到单向链表
     // 当不考虑编号顺序时
