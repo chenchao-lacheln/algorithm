@@ -2,7 +2,7 @@ package com.lacheln.linkedlist;
 
 /**
  * SingerLinkedList
- * 单向链表 不考虑编号顺序
+ * 单向链表
  *
  * @author lacheln
  * @date 2022/8/4 21:47
@@ -84,8 +84,11 @@ class SingerLinkedList {
         return head;
     }
 
-    // 添加结点到单向链表
-    // 当不考虑编号顺序时
+    /**
+     * 单向链表-不考虑编号顺序
+     * @param heroNode
+     */
+    // 添加结点到单向链表 -当不考虑编号顺序时
     // 1.找到当前链表的最后结点
     // 2.将最后这个结点的 next  指向新的结点
     public void add(HeroNode heroNode) {
@@ -105,6 +108,10 @@ class SingerLinkedList {
         temp.next = heroNode;
     }
 
+    /**
+     *  单向链表-按照编号添加
+     * @param heroNode
+     */
     //第二种方式，在添加英雄时，根据排名将英雄插入到指定位置(如果有这个排名，则添加失败，并给出提示)
     public void addByOrder(HeroNode heroNode) {
         //头结点不能动，需要添加辅助辅助变量，来帮助找到添加的位置
