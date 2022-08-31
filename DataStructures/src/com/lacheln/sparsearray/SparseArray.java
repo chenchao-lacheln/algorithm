@@ -2,7 +2,7 @@ package com.lacheln.sparsearray;
 
 /**
  * SparseArray
- *
+ * 稀疏数组
  * @author lacheln
  * @date 2022/7/28 01:36
  * @since 1.0.0
