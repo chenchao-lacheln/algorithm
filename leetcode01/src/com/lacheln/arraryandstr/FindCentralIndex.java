@@ -1,10 +1,12 @@
 package com.lacheln.arraryandstr;
 
-import java.util.Scanner;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * FindCentralIndex
  * 寻找中心索引
+ *
  * @author chenchao
  * @date 2022/8/12 2:21 PM
  * @since 1.0.0
@@ -19,30 +21,38 @@ public class FindCentralIndex {
          * 分析:
          */
         int[] nums1 = {1, 7, 3, 6, 5, 6};
-        System.out.println(pivotIndex(nums1));
+        Solution solution = new Solution();
+        System.out.println(solution.pivotIndex(nums1));
     }
-    public static int pivotIndex(int[] nums){
-        //总和
+}
+
+class Solution {
+    public int pivotIndex(int[] nums) {
         int sum = 0;
-        //遍历求和
-        for (int i : nums){
-            sum += i;
-            return sum;
+        //sum为数组中所有元素的总和
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
         }
+
         //如果除了nums[0]以外的和为0，即0为数组的中心索引
-        if (sum - nums[0] == 0){
+        if (sum - nums[0] == 0) {
             return 0;
         }
-        //寻找中心坐标
-        //左边和
-        int leftSum = 0;
-        for (int j : nums){
-            //右边和
-            int rightSum = sum - leftSum - nums[j];
-            if (leftSum == rightSum){
+
+        int flag = 0;
+        int end = 0;
+        //flag为数组中从索引为0的位置到索引为j的位置的所有元素的和
+        for (int j = 0; j < nums.length; j++) {
+            flag += nums[j];
+            if (j != 0) {
+                //end为数组中从索引为0的位置到索引为j-1的位置的所有元素的和
+                end = flag - nums[j];
+            }
+            //数组中索引为j的位置前的所有元素总和
+            while (end == sum - flag) {
+                //与数组中索引位置为j的位置后的所有元素总和相等
                 return j;
             }
-            leftSum += nums[j];
         }
         return -1;
     }
