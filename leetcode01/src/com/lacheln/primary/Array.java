@@ -56,6 +56,7 @@ public class Array {
                 targetNumLeagth = targetNum.length-1;
             }
         }
+        return targetNumLeagth;
     }
 }
 
