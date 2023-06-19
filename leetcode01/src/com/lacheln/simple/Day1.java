@@ -17,13 +17,13 @@ public class Day1 {
     @Test
     public void testTwoSum() {
         Solution solution = new Solution();
-        int[] nums = {2, 7, 11, 9};
+//        int[] nums = {2, 7, 11, 9};
+        int[] nums = {};
         int target = 9;
         int[] res = solution.twoSum(nums, target);
         assertEquals(0, res[0]);
         assertEquals(1, res[1]);
     }
-
 }
 
 class Solution {
@@ -32,6 +32,10 @@ class Solution {
     定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
      */
     public int[] twoSum(int[] nums, int target) {
+        //增加对null和target为空的判断，并抛出异常
+        if (nums == null || nums.length == 0 || target == 0){
+            throw new IllegalArgumentException("Invalid input!!");
+        }
         int n = nums.length;
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
