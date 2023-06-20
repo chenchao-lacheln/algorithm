@@ -1,11 +1,6 @@
 package com.lacheln.simple;
 
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
 /**
  * Day1
  *
@@ -16,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Day1 {
     public static void main(String[] args) {
         //2.测试回文数
-        int num2 = 12321;
-        if (Solution.isPalindrome(num2)){
+        int num2 = 12353321;
+        if (Solution.isPalindrome(num2)) {
             System.out.println(num2 + "是回文数");
-        }else {
+        } else {
             System.out.println(num2 + "不是回文数");
         }
     }
@@ -52,16 +47,19 @@ class Solution {
      * 回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
      */
     public static boolean isPalindrome(int x) {
-        //排除负数和以0结尾的整数
-        if (x < 0 || (x % 10 == 0 && x != 0)) {
+        //排序负数和0结尾的整数
+        if (x < 0 || (x != 0 && x % 10 == 0)) {
             return false;
         }
-        int revertedNumber = 0;
-        while (x > revertedNumber) {
-            revertedNumber = revertedNumber * 10 + x / 10;
+
+        int reversed = 0;
+        while (x > reversed) {
+            //翻转整数x，获取x的后半部分
+            reversed = reversed * 10 + x % 10;
+            //获取整数x的前半部分
             x /= 10;
         }
-        //奇数长度的数，需要去掉中间的一位
-        return x == revertedNumber || x == revertedNumber / 10;
+        //判断x的前半部分与后半部分是否想等：偶数直接判断，奇数去掉中间的数
+        return x == reversed || x == reversed / 10;
     }
 }
