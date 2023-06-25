@@ -35,7 +35,8 @@ class Solution {
      * 1.求2数之和
      * 定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
      */
-    //1.循环遍历
+    //1.暴力枚举法：解法很简单直接，但时间复杂度较高，不适用于大规模数据的情况。
+    //2.时间复杂度为 O(n^2)，空间复杂度为 O(1)。
     public static int[] twoSum1(int[] nums, int target) {
         //增加对null和target为空的判断，并抛出异常
         if (nums == null || nums.length == 0 || target == 0) {
@@ -49,10 +50,17 @@ class Solution {
                 }
             }
         }
-        return new int[0];
+        //如果没有符合条件的数组，返回空数组或者抛出异常
+//        return new int[0];
+        throw new IllegalArgumentException("No two sum solution");
     }
 
-    //2.用哈希表解决
+    //2.用哈希表解决（最优解）：不符合条件的值存入hashMap，符合的值直接返回下标
+    /*
+    算法原理：遍历数组 nums，在遍历的过程中，用哈希表记录已经遍历的数及其下标，每次遍历到一个数时，
+    计算其值与 target 的差值 complement 是否已经存在于哈希表中，如果存在，则说明找到了一组符合要求的数，
+    直接返回这两个数的下标即可；否则将当前数存入哈希表中等待后续匹配。时间复杂度为 O(n)，空间复杂度为 O(n)。
+     */
     public static int[] twoSum2(int[] nums, int target) {
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         //遍历数组nums
@@ -69,6 +77,8 @@ class Solution {
         //没有找到，返回空数组
         return new int[] {};
     }
+
+    //3.排序 + 双指针法
 
     /**
      * 2.回文数
