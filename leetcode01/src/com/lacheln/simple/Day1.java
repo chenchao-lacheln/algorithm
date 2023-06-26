@@ -13,12 +13,12 @@ import java.util.HashMap;
 public class Day1 {
     public static void main(String[] args) {
         //1.测试两数之和
-//        int[] nums = {2,7,11,15};
-//        int target = 9;
-//        int[] res = Solution.twoSum3(nums,target);
-//        for (int i = 0;i < res.length;i++){
-//            System.out.print(i + " ");
-//        }
+        int[] nums = {2, 7, 11, 15};
+        int target = 13;
+        int[] res = Solution.twoSum3(nums, target);
+        for (int i = 0; i < res.length; i++) {
+            System.out.print(res[i] + " ");
+        }
 
         //2.测试回文数
 //        int num2 = 12353321;
@@ -95,28 +95,40 @@ class Solution {
         Arrays.sort(numsSorted);
         //定义左右指针
         int left = 0, right = n - 1;
+        //增加异常判断
+        boolean found = false;
         //确保双指针正常移动
-        while (left < right) {
+        //遍历的过程中加入判断，当左右指针相遇时仍未找到满足条件的两个数，即可退出循环
+        Arrays.sort(numsSorted); // 将副本排序
+        while (left < right && !found) { // 双指针法扫描副本数组，查找两个数之和等于 target
             int sum = numsSorted[left] + numsSorted[right];
-            //如果目标值小于和，则左指针右移，反之右指针左移
-            if (target < sum) {
+            if (sum == target) { // 如果找到了，则退出循环
+                found =true;
+                break;
+            } else if (sum < target) { // 否则根据两个数之和与 target 的大小关系，决定移动左指针还是右指针
                 left++;
             } else {
                 right--;
             }
         }
 
+        // 在找到满足条件的两数时标记为 true，如果没有找到则返回空数组或者抛出异常
+        if (!found) {
+//            return new int[0];
+            throw new IllegalArgumentException("数组不存在");
+        }
+
         //记录左指针数据
         int[] indices = new int[2];
-        for (int i = 0; i < n; i++) {
-            if (numsSorted[left] == nums[i]) {
+        for (int i = 0; i < n; i++) { // 在原数组中查找这两个数的下标
+            if (nums[i] == numsSorted[left]) { // 如果这个数等于左指针指向的数，则说明这个数是所求之一，记录其下标
                 indices[0] = i;
                 break;
             }
         }
         //记录右指针数据
-        for (int i = n - 1; i >= 0; i--) {
-            if (numsSorted[i] == nums[i]) {
+        for (int i = n - 1; i >= 0; i--) { // 在原数组中查找这两个数的下标
+            if (nums[i] == numsSorted[right]) { // 如果这个数等于右指针指向的数，则说明这个数是所求之一，记录其下标
                 indices[1] = i;
                 break;
             }
