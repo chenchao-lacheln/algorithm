@@ -1,6 +1,6 @@
 package com.lacheln.simple;
 
-
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -15,7 +15,7 @@ public class Day1 {
         //1.测试两数之和
 //        int[] nums = {2,7,11,15};
 //        int target = 9;
-//        int[] res = Solution.twoSum2(nums,target);
+//        int[] res = Solution.twoSum3(nums,target);
 //        for (int i = 0;i < res.length;i++){
 //            System.out.print(i + " ");
 //        }
@@ -28,8 +28,8 @@ public class Day1 {
 //            System.out.println(num2 + "不是回文数");
 //        }
         //3.测试罗马数字转整
-        String roman = "MCMXCIV";
-        System.out.println(Solution.romanToInt(roman));
+//        String roman = "MCMXCIV";
+//        System.out.println(Solution.romanToInt(roman));
     }
 }
 
@@ -82,6 +82,47 @@ class Solution {
     }
 
     //3.排序 + 双指针法
+    /*
+    可以先将数组排序，然后用双指针分别从数组的首尾开始扫描，如果两个指针所指的数之和大于 target，
+    则右指针左移，否则左指针右移，直到找到符合要求的两个数为止。
+     */
+    public static int[] twoSum3(int[] nums, int target) {
+        //数组长度
+        int n = nums.length;
+        //复制数组
+        int[] numsSorted = Arrays.copyOf(nums, n);
+        //数组排序
+        Arrays.sort(numsSorted);
+        //定义左右指针
+        int left = 0, right = n - 1;
+        //确保双指针正常移动
+        while (left < right) {
+            int sum = numsSorted[left] + numsSorted[right];
+            //如果目标值小于和，则左指针右移，反之右指针左移
+            if (target < sum) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        //记录左指针数据
+        int[] indices = new int[2];
+        for (int i = 0; i < n; i++) {
+            if (numsSorted[left] == nums[i]) {
+                indices[0] = i;
+                break;
+            }
+        }
+        //记录右指针数据
+        for (int i = n - 1; i >= 0; i--) {
+            if (numsSorted[i] == nums[i]) {
+                indices[1] = i;
+                break;
+            }
+        }
+        return indices;
+    }
 
     /**
      * 2.回文数
