@@ -1,5 +1,6 @@
 package com.lacheln.simple;
 
+
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -12,13 +13,13 @@ import java.util.HashMap;
  */
 public class Day1 {
     public static void main(String[] args) {
-        //1.测试两数之和
-        int[] nums = {2, 7, 11, 15};
-        int target = 13;
-        int[] res = Solution.twoSum3(nums, target);
-        for (int i = 0; i < res.length; i++) {
-            System.out.print(res[i] + " ");
-        }
+//        //1.测试两数之和
+//        int[] nums = {2, 7, 11, 15};
+//        int target = 13;
+//        int[] res = Solution.twoSum3(nums, target);
+//        for (int i = 0; i < res.length; i++) {
+//            System.out.print(res[i] + " ");
+//        }
 
         //2.测试回文数
 //        int num2 = 12353321;
@@ -27,7 +28,11 @@ public class Day1 {
 //        } else {
 //            System.out.println(num2 + "不是回文数");
 //        }
-        //3.测试罗马数字转整
+        //3.测试翻转整数
+        String str = "hello lacheln";
+        String reverseStr = Solution.reverseStr03(str);
+        System.out.println(reverseStr);
+        //4.测试罗马数字转整
 //        String roman = "MCMXCIV";
 //        System.out.println(Solution.romanToInt(roman));
     }
@@ -99,11 +104,10 @@ class Solution {
         boolean found = false;
         //确保双指针正常移动
         //遍历的过程中加入判断，当左右指针相遇时仍未找到满足条件的两个数，即可退出循环
-        Arrays.sort(numsSorted); // 将副本排序
         while (left < right && !found) { // 双指针法扫描副本数组，查找两个数之和等于 target
             int sum = numsSorted[left] + numsSorted[right];
             if (sum == target) { // 如果找到了，则退出循环
-                found =true;
+                found = true;
                 break;
             } else if (sum < target) { // 否则根据两个数之和与 target 的大小关系，决定移动左指针还是右指针
                 left++;
@@ -159,7 +163,42 @@ class Solution {
     }
 
     /**
-     * 3.罗马数字转整
+     * 翻转整数
+     *
+     * @param x
+     */
+    //1.使用StringBuilder或StringBuffer类：可以使用StringBuilder或StringBuffer类的reverse()方法快速翻转字符串。
+    public static void reverseStr01(String x) {
+        StringBuilder sb = new StringBuilder(x);
+        String reverseStr = sb.reverse().toString();
+        System.out.println("反转后的整数为 = " + reverseStr);
+    }
+    //2.使用字符数组：将字符串转换为字符数组，然后通过交换首尾字符的位置来实现翻转。
+    public static void reverseStr02(String x){
+        char[] charsArray = x.toCharArray();
+        int left = 0;
+        int right = charsArray.length - 1;
+        while (left < right){
+            char temp = charsArray[left];
+            charsArray[left] = charsArray[right];
+            charsArray[right] = temp;
+            left++;
+            right--;
+        }
+        String reverseStr = new String(charsArray);
+        System.out.println("反转后的整数为 = " + reverseStr);
+    }
+    //3.使用递归：通过递归函数来实现字符串的翻转。
+    public static String reverseStr03(String x){
+        if (x.isEmpty()){ //终止条件
+            return x;
+        }else {
+            return reverseStr03(x.substring(1)) + x.charAt(0);
+        }
+    }
+
+    /**
+     * 4.罗马数字转整
      * 字符          数值
      * I             1
      * V             5
