@@ -173,12 +173,13 @@ class Solution {
         String reverseStr = sb.reverse().toString();
         System.out.println("反转后的整数为 = " + reverseStr);
     }
+
     //2.使用字符数组：将字符串转换为字符数组，然后通过交换首尾字符的位置来实现翻转。
-    public static void reverseStr02(String x){
+    public static void reverseStr02(String x) {
         char[] charsArray = x.toCharArray();
         int left = 0;
         int right = charsArray.length - 1;
-        while (left < right){
+        while (left < right) {
             char temp = charsArray[left];
             charsArray[left] = charsArray[right];
             charsArray[right] = temp;
@@ -188,11 +189,12 @@ class Solution {
         String reverseStr = new String(charsArray);
         System.out.println("反转后的整数为 = " + reverseStr);
     }
+
     //3.使用递归：通过递归函数来实现字符串的翻转。
-    public static String reverseStr03(String x){
-        if (x.isEmpty()){ //终止条件
+    public static String reverseStr03(String x) {
+        if (x.isEmpty()) { //终止条件
             return x;
-        }else {
+        } else {
             return reverseStr03(x.substring(1)) + x.charAt(0);
         }
     }
@@ -249,5 +251,19 @@ class Solution {
     将每个数字与其右侧的数字相比较，如果左侧的数字比右侧的数字小，则需要执行减法操作。
     否则，执行加法操作。最终，将所有的数字加起来即可。这种解法可以避免使用 `Map` 对象，从而提高算法效率。
      */
+
+    /**
+     * 最长公共前缀
+     * 编写一个函数来查找字符串数组中的最长公共前缀。
+     * 如果不存在公共前缀，返回空字符串 ""。
+     * 输入：strs = ["flower","flow","flight"]
+     * 输出："fl"
+     */
+//    public static String longestCommonPrefix(String[] str) {
+//        //判空 返回空字符串
+//        if (str == null || str.length == 0) {
+//            return "";
+//        }
+//    }
 
 }
