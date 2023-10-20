@@ -10,9 +10,9 @@ import java.util.HashMap;
  * @since 1.0.0
  * 合并两个有序数组
  */
+@SuppressWarnings("all")
 public class Merge {
     public static void main(String[] args) {
-
     }
 
     /*
@@ -24,6 +24,7 @@ public class Merge {
      */
     public void ChenMerge(int[] num1, int m, int[] num2, int n) {
         HashMap hashMap = new HashMap();
+
     }
 }
 
