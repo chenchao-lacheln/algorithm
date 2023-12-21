@@ -41,6 +41,11 @@ public class LinearSearch {
 
         int res2 = LinearSearch.search(data, 999);
         System.out.println(res2);
+
+        Student[] students = {new Student("lacheln"),new Student("jack"),new Student("kafka")};
+        Student jack = new Student("jack");
+        int res3 = LinearSearch.search(students,jack);
+        System.out.println(res3); //-1 实际上数组中是存在这个名字的。
     }
 
     // TODO: 2023/12/22 当前无法避免重复代码编写：只能在int类型种查找一个int类型的数，java种基本数据类型有8种。不希望重复的写search方法
@@ -48,5 +53,5 @@ public class LinearSearch {
 
     // TODO: 2023/12/22 设计一个student类，编写equals方法。
 
-
 }
+
