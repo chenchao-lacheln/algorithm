@@ -42,8 +42,9 @@ public class LinearSearch {
         int res2 = LinearSearch.search(data, 999);
         System.out.println(res2);
 
+        //注意：在实际的比较中，可能会有需求，需要忽略名字的大小写。进行比较。 可以在代码中进行修改.
         Student[] students = {new Student("lacheln"),new Student("jack"),new Student("kafka")};
-        Student jack = new Student("jack");
+        Student jack = new Student("JACK");
         int res3 = LinearSearch.search(students,jack);
         System.out.println(res3); //-1 实际上数组中是存在这个名字的。
     }

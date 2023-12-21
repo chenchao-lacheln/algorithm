@@ -40,10 +40,11 @@ public class Student {
         Student another = (Student) student;
 
         //判断比较相等的逻辑.
-        //equals表示的是 private String name;中String类对象的equals方法
-        //把2个学生类对象的比较，变成了字符串的比较。
-        //如果两个学生名字对应的字符串相等，就说明2个学生一样。
-        return this.name.equals(another.name);
+        //1.equals表示的是 private String name;中String类对象的equals方法
+        //2.把2个学生类对象的比较，变成了字符串的比较。
+        //3.如果两个学生名字对应的字符串相等，就说明2个学生一样。
+        //把字符串转化为小写字母，进行比较
+        return this.name.toLowerCase().equals(another.name.toLowerCase());
 
         //注意：上面的 equals 比较逻辑可以进行其他修改。实际中，Student类中，可能不止有name这一个属性。
 
