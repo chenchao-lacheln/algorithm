@@ -13,8 +13,6 @@ public class LinearSearch {
     private LinearSearch() {
     }
 
-    ;
-
     //    定义泛型方法，不指定类型，用户调用时指定
     public static <E> int search(E[] data, E target) {
         for (int i = 0; i < data.length; i++) {
@@ -22,7 +20,7 @@ public class LinearSearch {
             //这里是需要判断值相等
             //注意：对于不同类来说，里面的equals()方法，具体实现逻辑有可能是不同的；
             //     当前是使用Integer作为例子，在java中Integer已经帮助我们实现了equals了，包括8个基本数据类型的包装类。
-             //但是，如果使用自己定义的类的话，就需要在自己定义的类中，实现equals的逻辑。
+            //但是，如果使用自己定义的类的话，就需要在自己定义的类中，实现equals的逻辑。
             if (data[i].equals(target)) {
                 return i;
             }
@@ -43,9 +41,9 @@ public class LinearSearch {
         System.out.println(res2);
 
         //注意：在实际的比较中，可能会有需求，需要忽略名字的大小写。进行比较。 可以在代码中进行修改.
-        Student[] students = {new Student("lacheln"),new Student("jack"),new Student("kafka")};
+        Student[] students = {new Student("lacheln"), new Student("jack"), new Student("kafka")};
         Student jack = new Student("JACK");
-        int res3 = LinearSearch.search(students,jack);
+        int res3 = LinearSearch.search(students, jack);
         System.out.println(res3); //-1 实际上数组中是存在这个名字的。
     }
 
