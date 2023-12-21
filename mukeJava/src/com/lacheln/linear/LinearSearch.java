@@ -10,26 +10,43 @@ package com.lacheln.linear;
 public class LinearSearch {
     //线性查找
     //不希望用户创建LinearSearch对象，可以把LinearSearch构造函数设置成私有，外界无法调用
-    private LinearSearch(){};
-    public static int search(int[] data ,int target){
-        for (int i = 0;i < data.length;i++){
-            if (data[i] == target){
+    private LinearSearch() {
+    }
+
+    ;
+
+    //    定义泛型方法，不指定类型，用户调用时指定
+    public static <E> int search(E[] data, E target) {
+        for (int i = 0; i < data.length; i++) {
+            //此时 data[i] 和 target是一个类对象，此时判断两个类型相等时，不能用 == ，==是判断的引用相等。
+            //这里是需要判断值相等
+            //注意：对于不同类来说，里面的equals()方法，具体实现逻辑有可能是不同的；
+            //     当前是使用Integer作为例子，在java中Integer已经帮助我们实现了equals了，包括8个基本数据类型的包装类。
+             //但是，如果使用自己定义的类的话，就需要在自己定义的类中，实现equals的逻辑。
+            if (data[i].equals(target)) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static void main(String[] args){
-        int[] data = {24,18,12,19,16,66,22,4};
+    public static void main(String[] args) {
+        Integer[] data = {24, 18, 12, 19, 16, 66, 22, 4};
 
-        int res = LinearSearch.search(data,16);
+        //1.在java语言中，泛型只能接受类对象，不能接受基本数据类型。
+        //2.<Integer>search老版本中写<Integer表示将要调用泛型方法，java8中可以省略
+        //3.类型推断机制：search(data, 16); 可以自动推断出用户调用的search所对应的类型就是Integer类型 public static <E> int search(E[] data, E target) {}
+        int res = LinearSearch.<Integer>search(data, 16);
         System.out.println(res);
 
-        int res2 = LinearSearch.search(data,999);
+        int res2 = LinearSearch.search(data, 999);
         System.out.println(res2);
     }
 
     // TODO: 2023/12/22 当前无法避免重复代码编写：只能在int类型种查找一个int类型的数，java种基本数据类型有8种。不希望重复的写search方法
+    //解决方法：泛型，让search函数处理不同的数据类型。
+
+    // TODO: 2023/12/22 设计一个student类，编写equals方法。
+
 
 }
