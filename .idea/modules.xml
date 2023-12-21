@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/algorithm.iml" filepath="$PROJECT_DIR$/.idea/algorithm.iml" />
       <module fileurl="file://$PROJECT_DIR$/chapterNine/chapterNine.iml" filepath="$PROJECT_DIR$/chapterNine/chapterNine.iml" />
       <module fileurl="file://$PROJECT_DIR$/leetcode01/leetcode01.iml" filepath="$PROJECT_DIR$/leetcode01/leetcode01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mukeJava/mukeJava.iml" filepath="$PROJECT_DIR$/mukeJava/mukeJava.iml" />
     </modules>
   </component>
 </project>
