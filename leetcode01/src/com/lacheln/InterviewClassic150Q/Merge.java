@@ -23,8 +23,14 @@ public class Merge {
 
      */
     public void ChenMerge(int[] num1, int m, int[] num2, int n) {
-        HashMap hashMap = new HashMap();
+        int num1Len = num1.length;
+        int num2Len = num2.length;
+        //判断空
+        if (num2Len == 0) {
+            System.out.println(num1);
+        }
 
+        HashMap hashMap = new HashMap();
     }
 }
 
