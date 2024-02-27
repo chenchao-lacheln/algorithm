@@ -1,5 +1,7 @@
 package com.lacheln.selectionSort;
 
+import javax.management.RuntimeErrorException;
+
 /**
  * SelectionSort2
  *
@@ -43,11 +45,28 @@ public class SelectionSort2 {
 
     public static void main(String[] args) {
         //当前 arr接收的是一个泛型数组，泛型要求必须是一个类，不能是基本数据类型。 int[] arr 修改为  Integer[] arr
-        Integer[] arr = {1, 4, 2, 3, 6, 5};
+        int n = 10000;
+        //生成10000个随机数，随机数的范围是[0,10000)
+        Integer[] arr = ArrayGenerator.generateRandomArray(n,n);
+
+        //对排序进行计时
+        long startTime = System.nanoTime();
         SelectionSort2.srot(arr);
-        for (int e : arr) {
-            System.out.print(e + " ");
+        long endTime = System.nanoTime();
+        //从纳秒换算成秒，1*10(9次方)
+        double time = (endTime - startTime)/1000000000.0;
+//        for (int e : arr) {
+//            System.out.print(e + " ");
+//        }
+        //判断排序算法正确性
+        if (!SortingHelper.isSorted(arr)){
+            /*
+            Exception in thread "main" java.lang.RuntimeException: SelectionSort failed
+            at com.lacheln.selectionSort.SelectionSort2.main(SelectionSort2.java:63)
+             */
+            throw new RuntimeException("SelectionSort failed");
         }
-        System.out.println();
+        //打印时间
+        System.out.println(time + "s"); //0.097188959s
     }
 }

@@ -12,7 +12,9 @@ public class SelectionSort {
     private SelectionSort() {
     }
 
-
+    /*
+    时间复杂度：O(n2)
+     */
     public static void srot(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             //选择arr[i...n)中的最小索引值

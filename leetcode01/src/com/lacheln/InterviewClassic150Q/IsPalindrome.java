@@ -44,6 +44,6 @@ public class IsPalindrome {
      * @return
      */
     public static boolean chenIsPalindrome2(String s) {
-
+        return true;
     }
 }
