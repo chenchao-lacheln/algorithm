@@ -1,7 +1,5 @@
 package com.lacheln.selectionSort;
 
-import javax.management.RuntimeErrorException;
-
 /**
  * SelectionSort2
  *
