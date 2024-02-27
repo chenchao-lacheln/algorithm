@@ -7,7 +7,7 @@ package com.lacheln.selectionSort;
  * @date 2024/2/27
  * @since 1.0.0
  * 排序了10000次，如何验证这10000次排序是不是真正的排序了？
- * 排序数组是否有限
+ * 排序数组是否有效
  */
 public class SortingHelper {
     private SortingHelper() {
@@ -22,5 +22,27 @@ public class SortingHelper {
             }
         }
         return true;
+    }
+
+    /**
+     * 测试任意排序类型
+     * @param sortName
+     * @param arr
+     * @param <E>
+     */
+    public static <E extends Comparable<E>> void sortTest(String sortName, E[] arr) {
+
+        long startTime = System.nanoTime();
+        // TODO: 2024/2/27 用java反射知识，解决如下问题
+        if (sortName.equals("SelectionSort2")) {
+            SelectionSort2.sort(arr);
+        }
+        long endTime = System.nanoTime();
+        double time = (endTime - startTime) / 1000000000.0;
+        if (!SortingHelper.isSorted(arr)) {
+            throw new RuntimeException(sortName + "failed");
+        }
+        //打印算法类型名称，算法数据规模，算法时间
+        System.out.println(String.format("%s,n = %d : %f s",sortName,arr.length,time));
     }
 }

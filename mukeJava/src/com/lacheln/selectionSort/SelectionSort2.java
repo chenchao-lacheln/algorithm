@@ -20,7 +20,7 @@ public class SelectionSort2 {
     2.对于泛型约束来说，extends用在类上，表示继承某一个类，用在泛型，表示实现某一个接口。
     3.在java中，实现了 Comparable 接口，则表示该类是可比较的。
      */
-    public static <E extends Comparable<E>> void srot(E[] arr) {
+    public static <E extends Comparable<E>> void sort(E[] arr) {
         for (int i = 0; i < arr.length; i++) {
             int minIndex = i;
             for (int j = i; j < arr.length; j++) {
@@ -49,24 +49,26 @@ public class SelectionSort2 {
         //生成10000个随机数，随机数的范围是[0,10000)
         Integer[] arr = ArrayGenerator.generateRandomArray(n,n);
 
-        //对排序进行计时
-        long startTime = System.nanoTime();
-        SelectionSort2.srot(arr);
-        long endTime = System.nanoTime();
-        //从纳秒换算成秒，1*10(9次方)
-        double time = (endTime - startTime)/1000000000.0;
-//        for (int e : arr) {
-//            System.out.print(e + " ");
+//        //对排序进行计时
+//        long startTime = System.nanoTime();
+//        SelectionSort2.sort(arr);
+//        long endTime = System.nanoTime();
+//        //从纳秒换算成秒，1*10(9次方)
+//        double time = (endTime - startTime)/1000000000.0;
+////        for (int e : arr) {
+////            System.out.print(e + " ");
+////        }
+//        //判断排序算法正确性
+//        if (!SortingHelper.isSorted(arr)){
+//            /*
+//            Exception in thread "main" java.lang.RuntimeException: SelectionSort failed
+//            at com.lacheln.selectionSort.SelectionSort2.main(SelectionSort2.java:63)
+//             */
+//            throw new RuntimeException("SelectionSort failed");
 //        }
-        //判断排序算法正确性
-        if (!SortingHelper.isSorted(arr)){
-            /*
-            Exception in thread "main" java.lang.RuntimeException: SelectionSort failed
-            at com.lacheln.selectionSort.SelectionSort2.main(SelectionSort2.java:63)
-             */
-            throw new RuntimeException("SelectionSort failed");
-        }
-        //打印时间
-        System.out.println(time + "s"); //0.097188959s
+//        //打印时间
+//        System.out.println(time + "s"); //0.097188959s
+
+        SortingHelper.sortTest("SelectionSort2",arr); //SelectionSort2,n = 10000 : 0.150676 s
     }
 }
