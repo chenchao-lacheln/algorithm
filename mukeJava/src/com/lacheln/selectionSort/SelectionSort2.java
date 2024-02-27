@@ -44,11 +44,18 @@ public class SelectionSort2 {
     }
 
     public static void main(String[] args) {
+        //进行多轮测试,2轮测试
+        /*
+        SelectionSort2,n = 10000 : 0.088992 s
+        SelectionSort2,n = 100000 : 7.126478 s
+        相差了约100倍，大概是n2
+         */
+        int[] dataSize = {10000,100000};
         //当前 arr接收的是一个泛型数组，泛型要求必须是一个类，不能是基本数据类型。 int[] arr 修改为  Integer[] arr
-        int n = 10000;
+//        int n = 10000;
         //生成10000个随机数，随机数的范围是[0,10000)
-        Integer[] arr = ArrayGenerator.generateRandomArray(n,n);
-
+        for (int n : dataSize) {
+            Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
 //        //对排序进行计时
 //        long startTime = System.nanoTime();
 //        SelectionSort2.sort(arr);
@@ -69,6 +76,7 @@ public class SelectionSort2 {
 //        //打印时间
 //        System.out.println(time + "s"); //0.097188959s
 
-        SortingHelper.sortTest("SelectionSort2",arr); //SelectionSort2,n = 10000 : 0.150676 s
+            SortingHelper.sortTest("SelectionSort2", arr); //SelectionSort2,n = 10000 : 0.150676 s
+        }
     }
 }
