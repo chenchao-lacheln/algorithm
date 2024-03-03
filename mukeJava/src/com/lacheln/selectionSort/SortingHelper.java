@@ -1,5 +1,7 @@
 package com.lacheln.selectionSort;
 
+import com.lacheln.insersionSort.InsersionSort;
+
 /**
  * SortingHelper
  *
@@ -36,6 +38,8 @@ public class SortingHelper {
         // TODO: 2024/2/27 用java反射知识，解决如下问题
         if (sortName.equals("SelectionSort2")) {
             SelectionSort2.sort(arr);
+        }else if (sortName.equals("InsersionSort")){
+            InsersionSort.sort(arr);
         }
         long endTime = System.nanoTime();
         double time = (endTime - startTime) / 1000000000.0;
