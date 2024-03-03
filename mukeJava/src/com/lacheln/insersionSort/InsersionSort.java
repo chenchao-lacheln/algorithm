@@ -19,10 +19,14 @@ public class InsersionSort {
         for (int i = 0; i < arr.length; i++) {
             //将arr[i]插入到合适的位置
             //j从i的位置向前比较，
-            for (int j = i; j - 1 >= 0; j--)
-                if (arr[j].compareTo(arr[j - 1]) < 0) {
-                    swap(arr, j, j - 1);
-                } else break;
+//            for (int j = i; j - 1 >= 0; j--)
+//                if (arr[j].compareTo(arr[j - 1]) < 0) {
+//                    swap(arr, j, j - 1);
+//                } else break;
+            //优化代码： arr[j].compareTo(arr[j-1]) > 0 也是属于循环体终止的条件，可以直接添加在条件中，就去掉了break。
+            for (int j=i;j-1>=0 && arr[j].compareTo(arr[j-1]) > 0 ;j--){
+                swap(arr,j,j-1);
+            }
         }
     }
     private static <E> void swap(E[] arr,int i,int j){
