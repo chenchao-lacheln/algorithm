@@ -40,6 +40,8 @@ public class SortingHelper {
             SelectionSort2.sort(arr);
         }else if (sortName.equals("InsersionSort")){
             InsersionSort.sort(arr);
+        }else if (sortName.equals("InsersionSort2")){
+            InsersionSort.sort2(arr);
         }
         long endTime = System.nanoTime();
         double time = (endTime - startTime) / 1000000000.0;
