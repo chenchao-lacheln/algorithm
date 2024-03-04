@@ -3,7 +3,6 @@ package com.lacheln.insersionSort;
 import com.lacheln.selectionSort.ArrayGenerator;
 import com.lacheln.selectionSort.SortingHelper;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -20,6 +19,7 @@ public class InsersionSort {
 
     /**
      * 通过遍历找到arr[i]和不断交换位置，存在对应的位置
+     *
      * @param arr
      * @param <E>
      */
@@ -74,11 +74,42 @@ public class InsersionSort {
         InsersionSort,n = 100000 : 12.591603 s
          */
         int[] dataSize = {10000, 100000};
+        //对于随机数组，针对插入排序和选择排序进行测试
+        System.out.println("Random Array：");
         for (int n : dataSize) {
             Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
-            Integer[] arr2 = Arrays.copyOf(arr,arr.length); //完全拷贝arr数组
-            SortingHelper.sortTest("InsersionSort", arr);
-            SortingHelper.sortTest("InsersionSort2", arr2);
+            Integer[] arr2 = Arrays.copyOf(arr, arr.length); //完全拷贝arr数组
+            SortingHelper.sortTest("InsersionSort2", arr);
+            SortingHelper.sortTest("SelectionSort2", arr2);
+
+            System.out.println(); //回车
+
+            //对于有序数组，针对插入排序和选择排序进行测试
+            System.out.println("Ordered Array：");
+            arr = ArrayGenerator.generateOrderedArray(n);
+            arr2 = Arrays.copyOf(arr, arr.length);
+            SortingHelper.sortTest("InsersionSort2", arr);
+            SortingHelper.sortTest("SelectionSort2", arr2);
+
+            System.out.println();
+
+            /*
+            测试结果如下：
+            Random Array：
+            InsersionSort2,n = 10000 : 0.112498 s
+            SelectionSort2,n = 10000 : 0.094814 s
+
+            Ordered Array：
+            InsersionSort2,n = 10000 : 0.000331 s
+            SelectionSort2,n = 10000 : 0.088320 s
+
+            InsersionSort2,n = 100000 : 6.188667 s
+            SelectionSort2,n = 100000 : 5.815516 s
+
+            Ordered Array：
+            InsersionSort2,n = 100000 : 0.000527 s
+            SelectionSort2,n = 100000 : 7.036710 s
+             */
         }
     }
 }
