@@ -1,6 +1,6 @@
 package com.lacheln.InterviewClassic150Q;
 
-import java.util.HashMap;
+import java.util.Arrays;
 
 /**
  * Merge
@@ -13,6 +13,14 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class Merge {
     public static void main(String[] args) {
+        int[] num1 = {1, 2, 3, 0, 0, 0};
+        int m = 3;
+        int[] num2 = {2, 5, 6};
+        int n = 3;
+        chenMerge(num1, m, num2, n);
+        for (int i = 0; i < num1.length; i++) {
+            System.out.print(num1[i] + " ");
+        }
     }
 
     /*
@@ -22,15 +30,11 @@ public class Merge {
     其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。
 
      */
-    public void ChenMerge(int[] num1, int m, int[] num2, int n) {
-        int num1Len = num1.length;
-        int num2Len = num2.length;
-        //判断空
-        if (num2Len == 0) {
-            System.out.println(num1);
+    public static void chenMerge(int[] num1, int m, int[] num2, int n) {
+        for (int i = 0; i < n; i++) {
+            num1[m + i] = num2[i];
         }
-
-        HashMap hashMap = new HashMap();
+        Arrays.sort(num1);
     }
 }
 
