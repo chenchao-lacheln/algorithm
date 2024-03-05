@@ -62,12 +62,22 @@ public class Array {
      */
     public void addLast(int e) {
         //注意：在添加新元素的时候，需要注意查看数组是否还有空间可以添加新的元素。
-        if (size == data.length) {
-            throw new IllegalArgumentException("AddLast failed. Array is full.");
-        }
-        //data[size++] = e;
-        data[size] = e;
-        size++;
+//        if (size == data.length) {
+//            throw new IllegalArgumentException("AddLast failed. Array is full.");
+//        }
+//        //data[size++] = e;
+//        data[size] = e;
+//        size++;
+        add(size, e);
+    }
+
+    /**
+     * 在所有元素前，添加1个新元素e
+     *
+     * @param e
+     */
+    public void addFirst(int e) {
+        add(0, e);
     }
 
     /**
