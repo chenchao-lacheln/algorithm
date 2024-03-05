@@ -6,7 +6,7 @@ package com.lacheln.array;
  * @author chenchao
  * @date 2024/3/5
  * @since 1.0.0
- * 使用java中的数据
+ * 使用java中的数组
  */
 public class Main {
     public static void main(String[] args) {

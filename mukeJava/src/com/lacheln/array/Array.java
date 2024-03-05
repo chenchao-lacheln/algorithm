@@ -1,5 +1,7 @@
 package com.lacheln.array;
 
+import java.util.Arrays;
+
 /**
  * Array
  *
@@ -54,5 +56,24 @@ public class Array {
      */
     public boolean isEmpty() {
         return size == 0;
+    }
+
+
+    /**
+     * @return 定义打印输出格式
+     */
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        res.append(String.format("Array：size = %d , capacity = %d\n"), size, data.length);
+        res.append('[');
+        for (int i = 0; i < size; i++) {
+            res.append(data[i]);
+            if (i != size - 1) {
+                res.append(',');
+            }
+        }
+        res.append(']');
+        return res.toString();
     }
 }
