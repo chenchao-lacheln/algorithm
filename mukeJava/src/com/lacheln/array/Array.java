@@ -1,6 +1,5 @@
 package com.lacheln.array;
 
-import java.util.Arrays;
 
 /**
  * Array
@@ -11,8 +10,8 @@ import java.util.Arrays;
  * 二次封装数组
  */
 public class Array {
-    private int[] data;
-    private int size;
+    private int[] data; //数组名
+    private int size; //数组索引
 
     /**
      * @param capacity 构造函数，传入数组容量capacity构造Array
@@ -58,6 +57,40 @@ public class Array {
         return size == 0;
     }
 
+    /**
+     * @param e 向数组末添加新元素e
+     */
+    public void addLast(int e) {
+        //注意：在添加新元素的时候，需要注意查看数组是否还有空间可以添加新的元素。
+        if (size == data.length) {
+            throw new IllegalArgumentException("AddLast failed. Array is full.");
+        }
+        //data[size++] = e;
+        data[size] = e;
+        size++;
+    }
+
+    /**
+     * @param index
+     * @param e     向指定位置index添加新元素e
+     */
+    public void add(int index, int e) {
+        if (size == data.length) {
+            throw new IllegalArgumentException("AddLast failed. Array is full.");
+        }
+        //判断index合法性
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("AddLast failed. Require index >=0 and index <= size.");
+        }
+        //1.从最后1个元素开始进行遍历
+        //2.条件就是i大于要插入的位置的索引
+        //3.每1个元素都向后，挪动1个位置
+        for (int i = size - 1; i > index; i--) {
+            data[i + 1] = data[i];
+        }
+        data[index] = e;
+        size++;
+    }
 
     /**
      * @return 定义打印输出格式
