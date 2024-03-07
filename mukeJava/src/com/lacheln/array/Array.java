@@ -9,8 +9,8 @@ package com.lacheln.array;
  * @since 1.0.0
  * 二次封装数组
  */
-public class Array {
-    private int[] data; //数组名
+public class Array<E> {
+    private E[] data; //数组名
     private int size; //数组索引
 
     /**
@@ -19,7 +19,7 @@ public class Array {
      * @param capacity
      */
     public Array(int capacity) {
-        data = new int[capacity];
+        data = (E[]) new Object[capacity];
         size = 0;
     }
 
@@ -35,7 +35,7 @@ public class Array {
      *
      * @param staticArray
      */
-    public Array(int[] staticArray) {
+    public Array(E[] staticArray) {
         data = staticArray.clone(); //使用 clone() 方法复制静态数组以防止直接引用
         size = staticArray.length;
     }
@@ -72,7 +72,7 @@ public class Array {
      *
      * @param e
      */
-    public void addLast(int e) {
+    public void addLast(E e) {
         //注意：在添加新元素的时候，需要注意查看数组是否还有空间可以添加新的元素。
 //        if (size == data.length) {
 //            throw new IllegalArgumentException("AddLast failed. Array is full.");
@@ -88,7 +88,7 @@ public class Array {
      *
      * @param e
      */
-    public void addFirst(int e) {
+    public void addFirst(E e) {
         add(0, e);
     }
 
@@ -98,7 +98,7 @@ public class Array {
      * @param index
      * @param e
      */
-    public void add(int index, int e) {
+    public void add(int index, E e) {
         if (size == data.length) {
             throw new IllegalArgumentException("Add failed. Array is full.");
         }
@@ -124,7 +124,7 @@ public class Array {
      * @param index
      * @return
      */
-    int get(int index) {
+    public E get(int index) {
         //判断数据的合法性
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Get failed . Index is illegal");
@@ -138,7 +138,7 @@ public class Array {
      * @param index
      * @param e
      */
-    void set(int index, int e) {
+    public void set(int index, E e) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Set failed . Index is illegal");
         }
@@ -151,9 +151,9 @@ public class Array {
      * @param e
      * @return
      */
-    public boolean contains(int e) {
+    public boolean contains(E e) {
         for (int i = 0; i < size; i++) {
-            if (data[i] == e) {
+            if (data[i].equals(e)) {
                 return true;
             }
         }
@@ -167,9 +167,9 @@ public class Array {
      * @param e
      * @return
      */
-    public int find(int e) {
+    public int find(E e) {
         for (int i = 0; i < size; i++) {
-            if (data[i] == e) {
+            if (data[i].equals(e)) {
                 return i;
             }
         }
@@ -182,15 +182,16 @@ public class Array {
      * @param index
      * @return
      */
-    public int remove(int index) {
+    public E remove(int index) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Remove failed . Index is illegal");
         }
-        int ret = data[index];
+        E ret = data[index];
         for (int i = index + 1; i < size; i++) {
             data[i - 1] = data[i];
         }
         size--;
+        data[size] = null; // loitering objects != memory leak
         return ret;
     }
 
@@ -199,7 +200,7 @@ public class Array {
      *
      * @return
      */
-    public int removeFirst() {
+    public E removeFirst() {
         return remove(0);
     }
 
@@ -208,7 +209,7 @@ public class Array {
      *
      * @return
      */
-    public int removeLast() {
+    public E removeLast() {
         return remove(size - 1);
     }
 
@@ -220,7 +221,7 @@ public class Array {
      *
      * @param e
      */
-    public void removeElement(int e) {
+    public void removeElement(E e) {
         int index = find(e);
         if (index != -1) {
             remove(index);

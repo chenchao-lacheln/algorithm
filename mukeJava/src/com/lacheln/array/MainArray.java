@@ -11,7 +11,7 @@ package com.lacheln.array;
 public class MainArray {
     public static void main(String[] args) {
         //测试字符串输出
-        Array array = new Array(20);
+        Array<Integer> array = new Array<Integer>(20);
         for (int i = 0; i < 10; i++) {
             array.addLast(i);
         }

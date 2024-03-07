@@ -1,5 +1,7 @@
 package com.lacheln.selectionSort;
 
+import com.lacheln.array.Array;
+
 /**
  * Student
  *
@@ -54,5 +56,13 @@ public class Student implements Comparable<Student> {
     @Override
     public String toString() {
         return String.format("Student(name:%s,score:%d)", name, score);
+    }
+
+    public static void main(String[] args) {
+        Array<Student> array = new Array<>();
+        array.addLast(new Student("Alice",100));
+        array.addLast(new Student("Bob",66));
+        array.addLast(new Student("Charlie",88));
+        System.out.println(array);
     }
 }
