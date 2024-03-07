@@ -140,7 +140,7 @@ public class Array {
      */
     void set(int index, int e) {
         if (index < 0 || index >= size) {
-            throw new IllegalArgumentException("Get failed . Index is illegal");
+            throw new IllegalArgumentException("Set failed . Index is illegal");
         }
         data[index] = e;
     }
@@ -162,6 +162,7 @@ public class Array {
 
     /**
      * 查找数组中元素e所在的索引，如果不存在e，则返回-1
+     * 1.当前数组是可以存在重复元素的。可以创建一个findAll 查询出数组中所有存在的元素e
      *
      * @param e
      * @return
@@ -174,6 +175,58 @@ public class Array {
         }
         return -1;
     }
+
+    /**
+     * 从数组中删除index位置的元素，返回删除的元素
+     *
+     * @param index
+     * @return
+     */
+    public int remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Remove failed . Index is illegal");
+        }
+        int ret = data[index];
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+        size--;
+        return ret;
+    }
+
+    /**
+     * 从数组中删除第1个元素，返回删除的元素
+     *
+     * @return
+     */
+    public int removeFirst() {
+        return remove(0);
+    }
+
+    /**
+     * 从数组中删除最后1个元素，返回删除的元素
+     *
+     * @return
+     */
+    public int removeLast() {
+        return remove(size - 1);
+    }
+
+    /**
+     * 从数组中删除元素e
+     * 当前还存在的问题
+     * 1.用户不知道是否删除了元素，可以改为boolean解决
+     * 2.当前数组是可以存在重复元素的，当前删除后，并不保证数组中，不再存在e。可以创建一个removeAllElement
+     *
+     * @param e
+     */
+    public void removeElement(int e) {
+        int index = find(e);
+        if (index != -1) {
+            remove(index);
+        }
+    }
+
 
     /**
      * 定义打印输出格式
