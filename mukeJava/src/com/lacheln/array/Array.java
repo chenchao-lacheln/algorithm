@@ -99,13 +99,16 @@ public class Array<E> {
      * @param e
      */
     public void add(int index, E e) {
-        if (size == data.length) {
-            throw new IllegalArgumentException("Add failed. Array is full.");
-        }
         //判断index合法性
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("Add failed. Require index >=0 and index <= size.");
         }
+        //判断数组容量是否满了
+        if (size == data.length) {
+            //（数组扩容）扩容数组为原数组的2倍，java的collection的实现中，arrayList是扩容的1.5倍
+            resize(2 * data.length);
+        }
+
         //1.从最后1个元素开始进行遍历
         //2.条件就是i大于要插入的位置的索引
         //3.每1个元素都向后，挪动1个位置
@@ -192,6 +195,10 @@ public class Array<E> {
         }
         size--;
         data[size] = null; // loitering objects != memory leak
+        //缩容数组
+        if (size == data.length / 2) {
+            resize(data.length / 2);
+        }
         return ret;
     }
 
@@ -247,5 +254,18 @@ public class Array<E> {
         }
         res.append(']');
         return res.toString();
+    }
+
+    /**
+     * 动态数组:数组扩容
+     *
+     * @param newCapacity
+     */
+    private void resize(int newCapacity) {
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
     }
 }
