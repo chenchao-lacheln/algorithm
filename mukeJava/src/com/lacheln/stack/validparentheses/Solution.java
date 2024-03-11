@@ -11,9 +11,11 @@ import java.util.Stack;
  * @date 2024/3/11
  * @since 1.0.0
  * 用java自带的栈库：解决有效括号算法问题
+ * 用自己封装的栈，解决括号问题
  */
 public class Solution {
     public boolean isvalid(String s) {
+//        Stack<Character> stack = new Stack<>();
         ArrayStack<Character> stack = new ArrayStack<>();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
