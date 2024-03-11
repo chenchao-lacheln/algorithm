@@ -16,6 +16,6 @@ public interface Stack<E> {
     void push(E e);
     //从栈中取出元素
     E pop();
-    //栈顶元素
+    //查看栈顶元素
     E peek();
 }

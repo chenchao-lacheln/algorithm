@@ -136,6 +136,24 @@ public class Array<E> {
     }
 
     /**
+     * 取出最后1个元素
+     *
+     * @return
+     */
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    /**
+     * 取出第1个元素
+     *
+     * @return
+     */
+    public E getFirst() {
+        return get(0);
+    }
+
+    /**
      * 修改index索引位置的元素为e(外部修改数组的元素)
      *
      * @param index
