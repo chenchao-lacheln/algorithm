@@ -8,14 +8,38 @@ package com.lacheln.stack;
  * @since 1.0.0
  */
 public interface Stack<E> {
-    //返回int型
+    /**
+     * 查看栈中元素个数
+     *
+     * @return
+     */
     int getSize();
-    //返回boolean型
+
+    /**
+     * 栈元素是否为空
+     *
+     * @return
+     */
     boolean isEmpty();
-    //向栈中添加元素
+
+    /**
+     * 入栈：向栈中添加元素
+     *
+     * @param e
+     */
     void push(E e);
-    //从栈中取出元素
+
+    /**
+     * 出栈：从栈中取出元素
+     *
+     * @return
+     */
     E pop();
-    //查看栈顶元素
+
+    /**
+     * 查看栈顶元素
+     *
+     * @return
+     */
     E peek();
 }
