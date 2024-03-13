@@ -54,11 +54,7 @@ public class ArrayQueue<E> implements Queue<E> {
         StringBuilder res = new StringBuilder();
         res.append("Queue: ");
         res.append("font[ ");
-<<<<<<< HEAD
         for (int i = 0; i < array.getSize(); i++) {
-=======
-        for (int i = 0; i < array.getSize() - 1; i++) {
->>>>>>> 42901cd441b0ef533885b270e532f7e0730abc64
             res.append(array.get(i));
             if (i != array.getSize() - 1) {
                 res.append("，");
@@ -75,17 +71,10 @@ public class ArrayQueue<E> implements Queue<E> {
             System.out.println(queue);
 
             //每插入3个队列，就取出一个元素
-<<<<<<< HEAD
             if (i % 3 == 2) {
                 queue.dequeue();
                 System.out.println(queue);
             }
-=======
-//            if (i % 3 == 2) {
-//                queue.dequeue();
-//                System.out.println(queue);
-//            }
->>>>>>> 42901cd441b0ef533885b270e532f7e0730abc64
         }
     }
 }
