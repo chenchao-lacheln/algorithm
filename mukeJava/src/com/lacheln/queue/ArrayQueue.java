@@ -8,6 +8,7 @@ import com.lacheln.array.Array;
  * @author chenchao
  * @date 2024/3/12
  * @since 1.0.0
+ * 数组队列
  */
 public class ArrayQueue<E> implements Queue<E> {
     private Array<E> array;
