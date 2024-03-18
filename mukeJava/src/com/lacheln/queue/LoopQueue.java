@@ -1,6 +1,8 @@
 package com.lacheln.queue;
 
 
+import java.util.Arrays;
+
 /**
  * LoopQueue
  *
@@ -14,7 +16,7 @@ public class LoopQueue<E> implements Queue<E> {
     private E[] data;
     //队首索引和队尾索引
     private int front, tail;
-    //队列元素数量
+    //元素个量
     // （注意：front和tail也可以表述队列的元素数量，因此可以不需要当前变量，算法逻辑有坑。添加当前变量，可以让逻辑更清晰。）
     private int size;
 
@@ -63,10 +65,46 @@ public class LoopQueue<E> implements Queue<E> {
      */
     @Override
     public void enqueue(E e) {
-        //判断队列是否填满
+        //判断队列是否填满，扩容
         if ((tail + 1) % data.length == front) {
             resize(getCapacity() * 2);
         }
+        data[tail] = e;
+        tail = (tail + 1) % data.length; //tail 需要tail++，循环队列需要(tail+1) % data.length 处理
+        size++;
+    }
+
+    /**
+     * 出队
+     *
+     * @return
+     */
+    @Override
+    public E dequeue() {
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Cannot dequeue from an empty queue");
+        }
+        E ret = data[front];
+        data[front] = null;
+        front = (front + 1) % data.length;
+        size--;
+        if (size == getCapacity() / 4 && getCapacity() / 2 != 0) {
+            resize(getCapacity() / 2);
+        }
+        return ret;
+    }
+
+    /**
+     * 查看队首元素
+     *
+     * @return
+     */
+    @Override
+    public E getFront() {
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Queue is empty");
+        }
+        return data[front];
     }
 
     /**
@@ -84,5 +122,36 @@ public class LoopQueue<E> implements Queue<E> {
         data = newData;
         front = 0;
         tail = size;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        res.append(String.format("Queue：size = %d , capacity = %d\n", size, getCapacity()));
+        res.append("front [");
+        //因为是循环队列，tail可能比front还小，所以i是不能取到tail的，即：i != tail
+        //i++ 需要更改为循环的加1，即： i = (i + 1) % data.length
+        for (int i = front; i != tail; i = (i + 1) % data.length) {
+            res.append(data[i]);
+            if ((i + 1) % data.length != tail) {
+                res.append(',');
+            }
+        }
+        res.append("] tail");
+        return res.toString();
+    }
+
+    public static void main(String[] args) {
+        LoopQueue<Integer> queue = new LoopQueue<>();
+        for (int i = 0; i < 10; i++) {
+            queue.enqueue(i);
+            System.out.println(queue);
+
+            //每插入3个队列，就取出一个元素
+            if (i % 3 == 2) {
+                queue.dequeue();
+                System.out.println(queue);
+            }
+        }
     }
 }
