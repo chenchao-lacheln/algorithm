@@ -50,11 +50,11 @@ public class LinkedList<E> {
         }
     }
 
-    private Node head;//链表头
+    private Node dummyHead;//链表头
     private int size;//链表元素个数
 
     public LinkedList() {
-        head = null;
+        dummyHead = new Node(null, null); //虚拟头节点
         size = 0;
     }
 
@@ -77,19 +77,6 @@ public class LinkedList<E> {
     }
 
     /**
-     * 在链表头添加新元素e
-     *
-     * @param e
-     */
-    public void addFirst(E e) {
-//        Node node = new Node(e);
-//        node.next = head;
-//        head = node;
-        head = new Node(e, head);
-        size++;
-    }
-
-    /**
      * 在链表的index(0-based) 位置添加新的元素e
      * 在链表中不是一个常用的操作，练习用：
      *
@@ -101,20 +88,33 @@ public class LinkedList<E> {
             throw new IllegalArgumentException("Add failed . Illegal index .");
         }
         //特殊处理头节点
-        if (index == 0) {
-            addFirst(e);
-        } else {
-            Node prev = head;
-            for (int i = 0; i < index - 1; i++) {
-                prev = prev.next;
-            }
-//            Node node = new Node(e);
-//            node.next = prev.next;
-//            prev.next = node;
-
-            prev.next = new Node(e, prev.next);
-            size++;
+//        if (index == 0) {
+//            addFirst(e);
+//        } else {
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
         }
+//        Node node = new Node(e);
+//        node.next = prev.next;
+//        prev.next = node;
+        prev.next = new Node(e, prev.next);
+        size++;
+//        }
+    }
+
+    /**
+     * 在链表头添加新元素e
+     *
+     * @param e
+     */
+    public void addFirst(E e) {
+//        Node node = new Node(e);
+//        node.next = head;
+//        head = node;
+//        dummyHead = new Node(e, dummyHead);
+//        size++;
+        add(0, e);
     }
 
     /**
